@@ -1,0 +1,53 @@
+<section>
+
+<div class="container-fluid">
+        <div class="row">
+            
+            {{#each products}}
+            <div class="container m-auto pt-5">
+                <div class="m-4 mainWindow shadow bg-white-rounded p-1">
+
+                    <!-- Window 1-->
+                    <div class="d-flex flex-row flex-no-wrap bg-1">
+                        <!-- Product Image Section-->
+                        <div class="flex-grow-1 m-2">
+                            <img class="product-img p-2"
+                                src="/images/product-images/{{this._id}}.jpg">
+                        </div>
+                        <!-- Product Image Section-->
+                        
+                        <!-- Product Desc Section-->
+                        <div class="flex-grow-1 m-2 p-1">
+                            <div class="d-flex flex-column">
+                                <div class="desc p-1 d-flex justify-content-between">
+                                    <h4>{{this.Brand}}<h4><br>
+                                    <h4>Rs: {{this.Price}}<h4>
+                                </div>
+                                <div class="seller-name p-1">
+                                    <small><strong>{{this.Model}}</strong></small>
+                                </div>
+                                <div class="item-desc">
+                                        {{this.description}}
+                                </div>
+                                <div class="btn-group sizes mt-3 mb-2 pr-1">
+                                    <button type="button" class="btn btn-xs btn-outline-primary">{{this.Storage}}</button>
+                                    {{!-- <button type="button" class="btn btn-xs btn-outline-primary">6GB, 128GB</button>
+                                    <button type="button" class="btn btn-xs btn-outline-primary">8GB, 256GB</button> --}}
+                                </div>
+                                <div class="sizes mt-1 pr-1">
+                                    <button type="button" class="btn btn-xs mb-1 btn-warning">Buy</button>
+                                    {{!-- <button type="button" class="btn btn-xs mb-1 btn-primary">Add to Cart</button> --}}
+                                    {{!-- <a type="button"  class="btn btn-xs mb-1 btn-primary" href="/add-to-cart/{{this._id}}">Add to Cart</a> --}}
+                                    
+                                    <button onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+</section>

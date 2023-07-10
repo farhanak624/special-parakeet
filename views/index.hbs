@@ -1,0 +1,50 @@
+
+<section>
+    <div class="container">
+        <div class="row">
+            
+            {{#each products}}
+            <div class="container m-auto">
+                <div class="m-4 mainWindow shadow bg-white-rounded p-1">
+
+                    <!-- Window 1-->
+                    <div class="d-flex flex-row flex-no-wrap bg-1">
+                        <!-- Product Image Section-->
+                        <div class="flex-grow-1 m-2">
+                            <img class="product-img p-2"
+                                src="{{this.image}}">
+                        </div>
+                        <!-- Product Image Section-->
+
+                        <!-- Product Desc Section-->
+                        <div class="flex-grow-1 m-2 p-1">
+                            <div class="d-flex flex-column">
+                                <div class="desc p-1 d-flex justify-content-between">
+                                    <h4>{{this.Brand}}<h4><br>
+                                    <h4>{{this.Price}}<h4>
+                                </div>
+                                <div class="seller-name p-1">
+                                    <small><strong>{{this.name}}</strong></small>
+                                </div>
+                                <div class="item-desc">
+                                        {{this.description}}
+                                </div>
+                                <div class="btn-group sizes mt-3 mb-2 pr-1">
+                                    <button type="button" class="btn btn-xs btn-outline-primary">{{this.Storage}}</button>
+                                    {{!-- <button type="button" class="btn btn-xs btn-outline-primary">6GB, 128GB</button>
+                                    <button type="button" class="btn btn-xs btn-outline-primary">8GB, 256GB</button> --}}
+                                </div>
+                                <div class="sizes mt-1 pr-1">
+                                    <button type="button" class="btn btn-xs mb-1 btn-warning">Add btn</button>
+                                    <button type="button" class="btn btn-xs mb-1 btn-primary">Wishlist btn</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product Image Section-->
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

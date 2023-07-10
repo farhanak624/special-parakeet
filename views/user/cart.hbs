@@ -1,0 +1,104 @@
+<section>
+
+    <div class="container pt-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">Buy</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{this.product.Brand}}</td>
+                    <td><img style="width: 70px; height:70px" src="/images/product-images/{{this.product._id}}.jpg"
+                            alt=""></td>
+                    <td>{{this.product.Model}}</td>
+                    <td>Rs: {{this.product.Price}}</td>
+
+                    <td>
+                        <button class="cart-item-count mr-3"
+                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1) ">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                        <button class="cart-item-count ml-3"
+                            onclick=" changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1) "> +
+                        </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="removeQuantity('{{this._id}}','{{this.product._id}}')"
+                            href="">Remove</a>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <a href="/place-order" class="btn btn-success">place-order</a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="container float-left ml-5">
+        <h3 class=" mr-5" style="margin-left: 20rem;">Total Rs: <span id="total">{{totalValue}}</span> </h3>
+    </div>
+    <div class="container">
+        <a href="/place-order" class="btn btn-success">place-order</a>
+    </div>
+
+</section>
+<script>
+    function changeQuantity(cartId, prodId, userId, count) {
+        let quantity = parseInt(document.getElementById(prodId).innerHTML)
+        count = parseInt(count)
+        console.log(userId)
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+                user: userId,
+                cart: cartId,
+                product: prodId,
+                count: count,
+                quantity: quantity
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert("Product Removed from cart")
+                    location.reload()
+                }
+                else {
+                    document.getElementById(prodId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+
+                }
+            }
+        })
+    }
+
+    function removeQuantity(cartId, prodId) {
+        $.ajax({
+            url: '/remove-product',
+            data: {
+                cart: cartId,
+                product: prodId
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert("Product deleted from cart")
+                    location.reload()
+                }
+            }
+        })
+    }
+</script>

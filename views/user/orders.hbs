@@ -1,0 +1,43 @@
+<section>
+    <div class="container pt-5">
+        <h1 class="text-success" style="margin-top: 20px;">Your order is placed!!</h1>
+    </div>
+    <div class="container pt-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Payment Model</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{this.date}}</td>
+                    <td>
+                        {{this.deliveryDetails.address}},{{this.deliveryDetails.pincode}},{{this.deliveryDetails.mobile}}
+                    </td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>Rs:{{this.totalAmount}}</td>
+                    <td>{{this.status}}</td>
+                    <td>
+                        <a href="/view-order-products/{{this._id}}" class="btn btn-primary">View Product</a>
+                    </td>
+                </tr>
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="container float-left ml-5">
+    </div>
+    <div class="container">
+    </div>
+</section>
